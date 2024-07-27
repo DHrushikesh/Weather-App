@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WeatherAPP Weather Broadcast">
+    <script src="https://cdn.tailwindcss.com" ></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <title>Weather App</title>
+
+    <!-- custom css -->
+    <style type="text/tailwindcss">
+        @layer utilities 
+        {
+          .data-display{
+            color: orange;
+            border: 1px solid green;
+            margin-top: 14px;
+            width: fit-content;
+          }
+        }
+    </style>
+
+</head>
+<body class="bg-gray-600">
+    <!-- Header -->
+    <header class="border-2 flex-col text-center ">
+        <h1 class="text-orange-500 text-6xl my-4 font-serif"> Weather App </h1>
+        <p class="text-orange-500 text-2xl my-5"> Wherever you go, no matter what the weather, always bring your own sunshine. </p>
+    </header>
+
+    <section class="border-2  border-red-500 flex justify-center h-fit mt-6">
+        <!-- Info desk -->
+        <div class="border-2 border-black rounded-2xl flex-col  justify-center w-96 h-[600px]">
+
+            <div class="border-2 border-green-400 flex justify-center items-center py-2 min-h-fit">
+                <!-- search Bar -->
+                <input class="place-items-center rounded-lg border-2 border-black pl-1" type="text" name="searchbar" id="search-bar" placeholder=" Hyderabad,Mumbai ......">
+
+                <button type="button" id="search-button">
+                     <box-icon class="" name='search' type='solid' ></box-icon>
+                </button>
+            </div>
+
+            <p class="text-center">
+                <span>---------------</span>
+                or
+                <span>---------------</span>
+                
+            </p> 
+            
+            <p class="text-center">
+                <button id="location">
+                    <box-icon class="relative top-1" name='current-location'></box-icon>
+                </button>
+                <p class="text-center"> Use My Location </p>
+            </p>
+
+            <!-- Displayed diagram Area -->
+            <div class="images border-2 border-yellow-300 flex-col justify-center items-center" >
+                <img class="ml-auto mr-auto mt-5" src="weather.jpg" width="200px" height="200px" alt="weather Photo">
+            </div>
+
+            <!-- to Dispaly data -->
+            <div class="data border-2 border-blue-400 w-94 h-36 mt-4 flex flex-col justify-center items-center">
+                <!-- temperture -->
+                <p class=" data-display">Temperture</p>
+                <p class=" data-display">Humidity</p>
+                <p class=" data-display">Wind Speed</p>
+                
+            </div>
+
+
+        </div>   
+         
+    </section>
+
+    <script src="script.js">
+
+    </script>
+    
+</body>
+</html>
