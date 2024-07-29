@@ -69,12 +69,7 @@
 
     <section class=" flex-col justify-center items-center h-fit mt-10">
 
-        <div id="recentCitiesDropdown" class="mt-4" style="display: none;">
-            <label for="recentCities">Recently Searched Cities:</label>
-            <select id="recentCities" onchange="selectCity()" class="rounded-lg border-2 border-black pl-1">
-                <option value="">Select a city</option>
-            </select>
-        </div>
+       
        
         
 
@@ -89,6 +84,13 @@
                 <button type="button" id="search-button" class=" relative left-2 top-1 scale-y-110 hover:animate-spin">
                     <box-icon name='search'></box-icon>
                 </button>
+            </div>
+
+            <div id="recentCitiesDropdown" class="mt-2 mb-2 text-center" style="display: none;">
+                <label for="recentCities">Recently Searched Cities:</label>
+                <select id="recentCities" onchange="selectCity()" class="rounded-lg border-2 border-black pl-1">
+                    <option value="">Select a city</option>
+                </select>
             </div>
 
             <p class="text-center">
@@ -106,16 +108,9 @@
             </p>
 
             <!-- Displayed diagram Area -->
-            <div class="images flex-col justify-center items-center" >
+            <div  class="images flex-col justify-center items-center" >
                 <p class="mt-4 text-2xl text-center text-black font-extrabold" id="CityName"></p>
-                <img id="normal" class="ml-auto mr-auto mt-5" src="weather.jpg" width="250px" height="250px" alt="weather Photo">
-
-                <!-- sunny -->
-                <img id="sunny" class="hide ml-auto mr-auto mt-5 mb-6" width="96" height="96" src="https://img.icons8.com/emoji/96/sun-emoji.png" alt="sun-emoji"/>
-            
-                <!-- rainy -->
-                <img id="rainy" class="hide ml-auto mr-auto mt-6 mb-7" width="80" height="80" src="https://img.icons8.com/officel/80/light-rain.png" alt="light-rain"/>
-            
+                <div id="maindisplay"></div>
             </div>
 
             <!-- to Dispaly data -->
@@ -145,11 +140,11 @@
         </div>   
         <!-- to Display 5 days Forecast -->
         <section class="flex flex-wrap flex-row justify-center ml-auto mr-auto mt-4 ">
-            <div class="a5daydata box1"></div>
-            <div class="a5daydata box2"></div>
-            <div class="a5daydata box3"></div>
-            <div class="a5daydata box4"></div>
-            <div class="a5daydata box5"></div>
+            <div class="a5daydata box1 hide"></div>
+            <div class="a5daydata box2 hide"></div>
+            <div class="a5daydata box3 hide"></div>
+            <div class="a5daydata box4 hide"></div>
+            <div class="a5daydata box5 hide"></div>
         </section>
 
          

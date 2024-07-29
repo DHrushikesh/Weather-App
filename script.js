@@ -1,28 +1,42 @@
 const apikey = "fad2606b4b485abadba8e67c028a58cd";
 const searchbutton = document.getElementById("search-button");
 const currentlocation = document.getElementById("location");
+const maindisplay=document.getElementById("maindisplay")
 
 let lattitude ;
 let longitude ;
 let city = "" ;
 
 // To search MAnually
-searchbutton.addEventListener("click",()=>{
+searchbutton.addEventListener("click", () => {
     for (let index = 0; index < 5; index++) {
         const databox = document.querySelectorAll(".a5daydata")
-        databox[index].innerHTML="";
+        // remove the data
+        databox[index].innerHTML = "";
+        // will show boxes ones clicked
+        databox[index].classList.remove("hide")
     }
     const searchedplaced = document.getElementById("search-bar").value;
     console.log(searchedplaced);
     city = searchedplaced;
-    gettingcoordinates()
-})
+    saveCityToLocalStorage(city);
+    loadRecentCities();
+    gettingcoordinates();
+    
+});
+
+// Load recent cities on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadRecentCities();
+});
 
 // Get Location Details Automatically
 currentlocation.addEventListener("click",()=>{
     for (let index = 0; index < 5; index++) {
         const databox = document.querySelectorAll(".a5daydata")
         databox[index].innerHTML="";
+         // will show boxes ones clicked
+         databox[index].classList.remove("hide")
     }
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(
@@ -79,27 +93,21 @@ async function checkingweather()
     document.getElementById("Humidity").innerHTML=`  - ${Math.floor(data.main.humidity)} g/Kg `
     document.getElementById("WindSpeed").innerHTML=`  - ${Math.floor(data.wind.speed)} m/sec `
     
-    
-    // Changing Images according to weather
-    if(data.weather[0].main=="Drizzle"||data.weather[0].main=="Cloudy"||data.weather[0].main=="Rain"){
-       let photo =  document.getElementById("normal");
-    //    removing other photos
-       photo.classList.add("hide");
-       document.getElementById("sunny").classList.add("hide");
-        // adding New Photos
-       document.getElementById("rainy").classList.remove("hide");
 
-    }
-    else{
-       let photo =  document.getElementById("normal");
-       photo.classList.add("hide");
-       document.getElementById("rainy").classList.add("hide");
-        // Adding New photos
-       document.getElementById("sunny").classList.remove("hide");
+    // Removing old images
+    maindisplay.innerHTML=""
 
-       
-    }
-
+    // Displaying Icon
+    let iconid= data.weather[0].icon
+    let icon = document.createElement("img");
+    // stylng Image
+    icon.width = 80; 
+    icon.height = 80; 
+    icon.style.marginLeft="auto"
+    icon.style.marginRight="auto"
+    // image URL
+    icon.src=`http://openweathermap.org/img/w/${iconid}.png`
+    maindisplay.appendChild(icon)
 
 }
 
@@ -134,8 +142,8 @@ async function getting5daysdata(){
         dates.push(date);
 
         // weather array
-        photo=(data.list[index].weather[0].main)
-        weatherpic.push(photo)
+        iconsid=(data.list[index].weather[0].icon)
+        weatherpic.push(iconsid)
 
         // humidity array
         let humidity=(data.list[index].main.humidity)
@@ -169,13 +177,7 @@ async function getting5daysdata(){
     img.style.marginLeft="auto"
     img.style.marginRight="auto"
     img.style.marginTop="10px"  
-
-    if(weatherpic[i]=="Drizzle"||weatherpic[i]=="Clouds"||weatherpic[i]=="Rain"){
-        img.src = "https://img.icons8.com/officel/80/light-rain.png"
-    }
-    else{
-        img.src = "https://img.icons8.com/emoji/96/sun-emoji.png"
-    }
+    img.src=`http://openweathermap.org/img/w/${weatherpic[i]}.png`
 
     
     // display Temperature
@@ -199,5 +201,45 @@ async function getting5daysdata(){
     databox[i].appendChild(temperaturedata);
     databox[i].appendChild(humiditydata);
     databox[i].appendChild(windspeeddata);
+    }
+}
+
+function saveCityToLocalStorage(city) {
+    let cities = JSON.parse(localStorage.getItem('recentCities')) || [];
+    // removing elements if alredy present
+    cities = cities.filter(c => c !== city); 
+    // Just added to the beginning
+    cities.unshift(city); 
+    localStorage.setItem('recentCities', JSON.stringify(cities));
+}
+
+function loadRecentCities() {
+    const cities = JSON.parse(localStorage.getItem('recentCities')) || [];
+    const dropdown = document.getElementById('recentCities');
+    dropdown.innerHTML = '<option value="">Select a city</option>';
+    cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        dropdown.appendChild(option);
+    });
+
+    const dropdownContainer = document.getElementById('recentCitiesDropdown');
+    if (cities.length > 0) {
+        dropdownContainer.style.display = 'block';
+    } else {
+        dropdownContainer.style.display = 'none';
+    }
+}
+
+function selectCity() {
+    const city = document.getElementById('recentCities').value;
+    if (city) {
+        document.getElementById('search-bar').value = city;
+        for (let index = 0; index < 5; index++) {
+            const databox = document.querySelectorAll(".a5daydata")
+            databox[index].innerHTML = "";
+        }
+        gettingcoordinates();
     }
 }
