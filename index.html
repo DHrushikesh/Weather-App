@@ -12,33 +12,82 @@
     <style type="text/tailwindcss">
         @layer utilities 
         {
+            .bgimage{
+                background-image: url("https://i.pinimg.com/originals/b2/92/b5/b292b581efa9e2aa11f87a204697d626.jpg");
+                background-size: cover;
+            }
+            .hide{
+                display: none;
+            }
           .data-display{
-            color: orange;
-            border: 1px solid green;
-            margin-top: 14px;
-            width: fit-content;
+            visibility: hidden;
+            display: flex;
+            flex-direction: row;
+            flex-grow: 2;
+            font-size: large;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: rgb(0, 0, 0);
+            /* border: 1px solid red; */
+            margin-top: 5px;
+            height: 50px;
+          }
+          .a5daydata{
+            border: 1px solid black;
+            border-radius: 10px;
+            margin-top: 3px;
+            height: 250px;
+            width: 200px;
+            margin: 30px;
+            background: transparent;
+            backdrop-filter: blur(40px);
+          }
+          .textinboxes{
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: black;
+            text-align: center;
+            margin-top: 10px;
+          }
+          .dateinboxes{
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: rgb(243, 102, 20);
+            margin-left: 10px;
+            margin-top: 10px;
+          }
+          .images{
+            margin-left: auto;
+            margin-right: auto;
           }
         }
     </style>
 
 </head>
-<body class="bg-gray-600">
+<body class="bgimage">   
     <!-- Header -->
-    <header class="border-2 flex-col text-center ">
-        <h1 class="text-orange-500 text-6xl my-4 font-serif"> Weather App </h1>
-        <p class="text-orange-500 text-2xl my-5"> Wherever you go, no matter what the weather, always bring your own sunshine. </p>
+    <header class=" flex-col text-center">
+        <h1 class="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent text-6xl mt-4 my-4 font-bold max-[700px]:text-3xl max-[700px]:mt-2"> Weather Report</h1>
     </header>
 
-    <section class="border-2  border-red-500 flex justify-center h-fit mt-6">
+    <section class=" flex-col justify-center items-center h-fit mt-10">
+
+        <div id="recentCitiesDropdown" class="mt-4" style="display: none;">
+            <label for="recentCities">Recently Searched Cities:</label>
+            <select id="recentCities" onchange="selectCity()" class="rounded-lg border-2 border-black pl-1">
+                <option value="">Select a city</option>
+            </select>
+        </div>
+       
+        
+
         <!-- Info desk -->
-        <div class="border-2 border-black rounded-2xl flex-col  justify-center w-96 h-[600px]">
-
-            <div class="border-2 border-green-400 flex justify-center items-center py-2 min-h-fit">
+        <div class="border-2 backdrop-blur-2xl ml-auto mr-auto border-black rounded-2xl flex-col  justify-center w-96 h-fit">
+            <h1 class="text-center font-bold text-lg relative top-2 right-2">Enter a City Name</h1>
+            <div class=" mt-2  flex flex-wrap justify-center items-center py-2 min-h-fit">
                 <!-- search Bar -->
-                <input class="place-items-center rounded-lg border-2 border-black pl-1" type="text" name="searchbar" id="search-bar" placeholder=" Hyderabad,Mumbai ......">
+                 
+                <input class=" rounded-lg border-2 border-black pl-1" type="text" name="searchbar" id="search-bar" placeholder=" Hyderabad,Mumbai ......">
 
-                <button type="button" id="search-button">
-                     <box-icon class="" name='search' type='solid' ></box-icon>
+                <button type="button" id="search-button" class=" relative left-2 top-1 scale-y-110 hover:animate-spin">
+                    <box-icon name='search'></box-icon>
                 </button>
             </div>
 
@@ -47,31 +96,62 @@
                 or
                 <span>---------------</span>
                 
-            </p> 
+            </p>  
             
             <p class="text-center">
                 <button id="location">
-                    <box-icon class="relative top-1" name='current-location'></box-icon>
+                    <box-icon class="relative top-1 animate-bounce " name='current-location'></box-icon>
                 </button>
-                <p class="text-center"> Use My Location </p>
+                <p class="text-center font-semibold text-lg"> Use My Location </p>
             </p>
 
             <!-- Displayed diagram Area -->
-            <div class="images border-2 border-yellow-300 flex-col justify-center items-center" >
-                <img class="ml-auto mr-auto mt-5" src="weather.jpg" width="200px" height="200px" alt="weather Photo">
+            <div class="images flex-col justify-center items-center" >
+                <p class="mt-4 text-2xl text-center text-black font-extrabold" id="CityName"></p>
+                <img id="normal" class="ml-auto mr-auto mt-5" src="weather.jpg" width="250px" height="250px" alt="weather Photo">
+
+                <!-- sunny -->
+                <img id="sunny" class="hide ml-auto mr-auto mt-5 mb-6" width="96" height="96" src="https://img.icons8.com/emoji/96/sun-emoji.png" alt="sun-emoji"/>
+            
+                <!-- rainy -->
+                <img id="rainy" class="hide ml-auto mr-auto mt-6 mb-7" width="80" height="80" src="https://img.icons8.com/officel/80/light-rain.png" alt="light-rain"/>
+            
             </div>
 
             <!-- to Dispaly data -->
-            <div class="data border-2 border-blue-400 w-94 h-36 mt-4 flex flex-col justify-center items-center">
+            <div class=" flex flex-col justify-center items-center">
                 <!-- temperture -->
-                <p class=" data-display">Temperture</p>
-                <p class=" data-display">Humidity</p>
-                <p class=" data-display">Wind Speed</p>
+                <p class=" data-display mt-3">
+                    <span>Temperature </span>
+                    <!-- <img width="50" class=" ml-1" height="40" src="https://img.icons8.com/nolan/64/temperature.png" alt="temperature"/> -->
+                    <span  id="Temperature"></span>
+                </p>  
+                  <!-- Humidity  -->
+                <p class=" data-display">
+                    <span>Humidity </span>
+                    <!-- <img width="30" class=" ml-2" height="30" src="https://img.icons8.com/ios/50/humidity.png" alt="humidity"/> -->
+                    <span  id="Humidity"></span>
+                </p>
+                <!-- Wind Speed -->
+                <p class=" data-display">
+                    <span>Wind Speed </span>
+                    <!-- <img width="30" class="  ml-2" height="30" src="https://img.icons8.com/ios/50/windsock.png" alt="windsock"/> -->
+                    <span id="WindSpeed"></span>
+                </p>
                 
             </div>
 
 
         </div>   
+        <!-- to Display 5 days Forecast -->
+        <section class="flex flex-wrap flex-row justify-center ml-auto mr-auto mt-4 ">
+            <div class="a5daydata box1"></div>
+            <div class="a5daydata box2"></div>
+            <div class="a5daydata box3"></div>
+            <div class="a5daydata box4"></div>
+            <div class="a5daydata box5"></div>
+        </section>
+
          
     </section>
 
