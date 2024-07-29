@@ -17,7 +17,7 @@ searchbutton.addEventListener("click", () => {
         databox[index].classList.remove("hide")
     }
     const searchedplaced = document.getElementById("search-bar").value;
-    console.log(searchedplaced);
+    // console.log(searchedplaced);
     city = searchedplaced;
     saveCityToLocalStorage(city);
     loadRecentCities();
@@ -57,7 +57,7 @@ currentlocation.addEventListener("click",()=>{
 async function gettingcoordinates(){
     const value= await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apikey}`)
     const maindata = await value.json();
-    console.log(maindata)
+    // console.log(maindata)
   
 
     if(maindata.length>0){
@@ -120,7 +120,7 @@ async function checkingweather()
 async function getting5daysdata(){
     const maindata = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lattitude}&lon=${longitude}&appid=${apikey}`)
     const data = await maindata.json();
-    console.log(data)
+    // console.log(data)
 
     // declaring array to store data for different dates
     let dates=[];
@@ -155,7 +155,7 @@ async function getting5daysdata(){
     }
 
 
-    console.log(weatherpic)
+    // console.log(weatherpic)
 
     for (let i = 0; i < dates.length; i++) {
     

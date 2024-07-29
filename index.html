@@ -69,10 +69,6 @@
 
     <section class=" flex-col justify-center items-center h-fit mt-10">
 
-       
-       
-        
-
         <!-- Info desk -->
         <div class="border-2 backdrop-blur-2xl ml-auto mr-auto border-black rounded-2xl flex-col  justify-center w-96 h-fit">
             <h1 class="text-center font-bold text-lg relative top-2 right-2">Enter a City Name</h1>
@@ -81,11 +77,11 @@
                  
                 <input class=" rounded-lg border-2 border-black pl-1" type="text" name="searchbar" id="search-bar" placeholder=" Hyderabad,Mumbai ......">
 
-                <button type="button" id="search-button" class=" relative left-2 top-1 scale-y-110 hover:animate-spin">
+                <button type="button" value="search-button" id="search-button" class=" relative left-2 top-1 scale-y-110 hover:animate-spin">
                     <box-icon name='search'></box-icon>
                 </button>
             </div>
-
+            <!-- Drop Down Menu ADDed -->
             <div id="recentCitiesDropdown" class="mt-2 mb-2 text-center" style="display: none;">
                 <label for="recentCities">Recently Searched Cities:</label>
                 <select id="recentCities" onchange="selectCity()" class="rounded-lg border-2 border-black pl-1">
