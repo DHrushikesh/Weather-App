@@ -214,8 +214,10 @@ function saveCityToLocalStorage(city) {
 }
 
 function loadRecentCities() {
+    // loading data from storage
     const cities = JSON.parse(localStorage.getItem('recentCities')) || [];
     const dropdown = document.getElementById('recentCities');
+    // appending option in dropDown Menu
     dropdown.innerHTML = '<option value="">Select a city</option>';
     cities.forEach(city => {
         const option = document.createElement('option');
@@ -224,6 +226,7 @@ function loadRecentCities() {
         dropdown.appendChild(option);
     });
 
+    // Displaying DropDown Menu's
     const dropdownContainer = document.getElementById('recentCitiesDropdown');
     if (cities.length > 0) {
         dropdownContainer.style.display = 'block';
@@ -233,6 +236,7 @@ function loadRecentCities() {
 }
 
 function selectCity() {
+    // getting Citites Names
     const city = document.getElementById('recentCities').value;
     if (city) {
         document.getElementById('search-bar').value = city;
