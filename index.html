@@ -4,61 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="WeatherAPP Weather Broadcast">
-    <script src="https://cdn.tailwindcss.com" ></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href="src/output.css" rel="stylesheet">
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/search.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/chevron-double-down-o.css' rel='stylesheet'>
     <title>Weather App</title>
 
-    <!-- custom css -->
-    <style type="text/tailwindcss">
-        @layer utilities 
-        {
-            .bgimage{
-                background-image: url("https://i.pinimg.com/originals/b2/92/b5/b292b581efa9e2aa11f87a204697d626.jpg");
-                background-size: cover;
-            }
-            .hide{
-                display: none;
-            }
-          .data-display{
-            visibility: hidden;
-            display: flex;
-            flex-direction: row;
-            flex-grow: 2;
-            font-size: large;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            color: rgb(0, 0, 0);
-            /* border: 1px solid red; */
-            margin-top: 5px;
-            height: 50px;
-          }
-          .a5daydata{
-            border: 1px solid black;
-            border-radius: 10px;
-            margin-top: 3px;
-            height: 250px;
-            width: 200px;
-            margin: 30px;
-            background: transparent;
-            backdrop-filter: blur(40px);
-          }
-          .textinboxes{
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            color: black;
-            text-align: center;
-            margin-top: 10px;
-          }
-          .dateinboxes{
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            color: rgb(243, 102, 20);
-            margin-left: 10px;
-            margin-top: 10px;
-          }
-          .images{
-            margin-left: auto;
-            margin-right: auto;
-          }
-        }
-    </style>
 
 </head>
 <body class="bgimage">   
@@ -77,8 +27,8 @@
                  
                 <input class=" rounded-lg border-2 border-black pl-1" type="text" name="searchbar" id="search-bar" placeholder=" Hyderabad,Mumbai ......">
 
-                <button type="button" name="Search-button" id="search-button" class=" relative left-2 top-1 scale-y-110 hover:animate-spin">
-                    <box-icon name='search'></box-icon>
+                <button type="button" name="Search-button" id="search-button" class=" font-bold relative left-2 scale-y-110 hover:animate-spin">
+                    <i class="gg-search"></i>
                 </button>
             </div>
             <!-- Drop Down Menu ADDed -->
@@ -98,7 +48,7 @@
             
             <p class="text-center">
                 <button id="location">
-                    <box-icon class="relative top-1 animate-bounce " name='current-location'></box-icon>
+                    <i class="gg-chevron-double-down-o"></i>
                 </button>
                 <p class="text-center font-semibold text-lg"> Use My Location </p>
             </p>

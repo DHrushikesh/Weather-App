@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities 
+{
+    .bgimage{
+        background-image: url("https://i.pinimg.com/originals/b2/92/b5/b292b581efa9e2aa11f87a204697d626.jpg");
+        background-size: cover;
+    }
+    .hide{
+        display: none;
+    }   
+  .data-display{
+    visibility: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 2;
+    font-size: large;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(0, 0, 0);
+    /* border: 1px solid red; */
+    margin-top: 5px;
+    height: 50px;
+  }
+  .a5daydata{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 3px;
+    height: 250px;
+    width: 200px;
+    margin: 30px;
+    background: transparent;
+    backdrop-filter: blur(40px);
+  }
+  .textinboxes{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: black;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .dateinboxes{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(243, 102, 20);
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .images{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
